@@ -1,5 +1,5 @@
 {
-  "name": "webinit",
+  "name": "@generator/webinit",
   "version": "1.0.0",
   "description": "Webpack bolierplates for webpages.",
   "main": "index.js",
