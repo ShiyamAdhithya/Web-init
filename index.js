@@ -4,39 +4,55 @@ const chalk = require('chalk');
 const clear = require('clear');
 const figlet = require('figlet');
 const Spinner = require('clui').Spinner;
-
-//const files = require('./lib/files');
-
+const path = require('path');
 
 
+const commander = require('commander');
+const pkgJson = require('./package.json')
+const files = require('./lib/files');
 
-clear();
-console.log(
-	chalk.yellow(
-		figlet.textSync('Webinit', { horizontalLayout: 'standard' })
-  )
-);
 
-// if (files.fileExists('package.json')) {
-//     console.log(chalk.red('Already a Node Project'));
-//     process.exit();
-// }
 
 
 const inquirer = require('./lib/inquire');
 const jsonCreater = require('./lib/createRepo');
 
-const Init = async () => {
-  const Options = await inquirer.askQuestions();
+const Init = async (projectName) => {
+
+	clear();
+	console.log(
+		chalk.yellow(
+			figlet.textSync('Webinit', { horizontalLayout: 'standard' })
+		)
+	);
+
+	let currentFolder = path.resolve(process.cwd());
+	
+	if(files.directoryExists(path.resolve(currentFolder,projectName))){
+		console.log(
+			chalk.red('Project Already Created!')
+		);
+		process.exit();
+	}
+	
+	files.createDirectory(currentFolder,projectName);
+
+	currentFolder = path.join(currentFolder,projectName)
+
+	
+
+
+  const Options = await inquirer.askQuestions(projectName);
 
   if (Options) {
-	console.log(Options);
-	const Status = new Spinner('Creating Project');
-	Status.start();
+	console.log(chalk.green.bold('All set initialising project'));
 
-	jsonCreater.createPackageJson(Options)
+	jsonCreater.createPackageJson(Options,currentFolder)
+		.then(() => jsonCreater.addDependencies(Options,currentFolder))
+		.then(() => jsonCreater.addDevDependencies(Options,currentFolder))
 		.then(() => {
-			Status.stop();
+			console.log(chalk.green.bold('All Done!'));
+			console.log(chalk.green.bold(`run cd ${projectName}`));
 		})
 		.catch(err => {
 			console.log(chalk.red.bold(err));
@@ -45,7 +61,16 @@ const Init = async () => {
 	
 };
 
-Init();
+//Init();
+
+const program = new commander.Command('webinit')
+	.version(pkgJson.version,'-V, --version')
+	.arguments('<project-directory>')
+	.usage(`${chalk.green('<project-directory>')} [options]`)
+	.action(name => {
+		Init(name);
+	})
+	.parse(process.argv);
 
 
 
