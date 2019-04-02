@@ -22,6 +22,7 @@ console.log(
 
 
 const inquirer = require('./lib/inquire');
+const jsonCreater = require('./lib/createRepo');
 
 const Init = async () => {
   const Options = await inquirer.askQuestions();
@@ -31,10 +32,15 @@ const Init = async () => {
 	const Status = new Spinner('Creating Project');
 	Status.start();
 
-	setTimeout(() => {
-	  Status.stop();
-	}, 2000);
-  }
+	jsonCreater.createPackageJson(Options)
+		.then(() => {
+			Status.stop();
+		})
+		.catch(err => {
+			console.log(chalk.red.bold(err));
+		});
+	}
+	
 };
 
 Init();
