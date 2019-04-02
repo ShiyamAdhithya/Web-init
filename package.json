@@ -1,0 +1,31 @@
+{
+  "name": "webinit",
+  "version": "1.0.0",
+  "description": "Webpack bolierplates for webpages.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "webpack",
+    "biolerplate"
+  ],
+  "author": "Shiyam Adhithya",
+  "license": "MIT",
+  "bin": {
+    "webinit": "./index.js"
+  },
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "clear": "^0.1.0",
+    "clui": "^0.3.6",
+    "commander": "^2.19.0",
+    "figlet": "^1.2.1",
+    "inquirer": "^6.2.2",
+    "loadash": "^1.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0"
+  }
+}
