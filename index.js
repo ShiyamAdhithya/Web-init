@@ -3,17 +3,15 @@
 const chalk = require('chalk');
 const clear = require('clear');
 const figlet = require('figlet');
-const Spinner = require('clui').Spinner;
+
 const path = require('path');
-
-
 const commander = require('commander');
-const pkgJson = require('./package.json')
+
+
+
+
+const pkgJson = require('./package.json');
 const files = require('./lib/files');
-
-
-
-
 const inquirer = require('./lib/inquire');
 const jsonCreater = require('./lib/createRepo');
 
@@ -37,7 +35,7 @@ const Init = async (projectName) => {
 	
 	files.createDirectory(currentFolder,projectName);
 
-	currentFolder = path.join(currentFolder,projectName)
+	currentFolder = path.join(currentFolder,projectName);
 
 	
 
@@ -63,7 +61,8 @@ const Init = async (projectName) => {
 
 //Init();
 
-const program = new commander.Command('webinit')
+//const program = 
+new commander.Command('webinit')
 	.version(pkgJson.version,'-V, --version')
 	.arguments('<project-directory>')
 	.usage(`${chalk.green('<project-directory>')} [options]`)

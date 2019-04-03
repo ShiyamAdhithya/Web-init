@@ -19,8 +19,7 @@
         ],
         "quotes": [
             "error",
-            "single",
-            "backtick"
+            "single"            
         ],
         "semi": [
             "error",
