@@ -33,9 +33,7 @@ const Init = async (projectName) => {
 		process.exit();
 	}
 	
-	files.createDirectory(currentFolder,projectName);
-
-	currentFolder = path.join(currentFolder,projectName);
+	
 
 	
 
@@ -43,11 +41,16 @@ const Init = async (projectName) => {
   const Options = await inquirer.askQuestions(projectName);
 
   if (Options) {
+	files.createDirectory(currentFolder,Options.projectName);
+	currentFolder = path.join(currentFolder,Options.projectName);
+
 	console.log(chalk.green.bold('All set initialising project'));
 
 	jsonCreater.createPackageJson(Options,currentFolder)
+		.then(() => jsonCreater.generateConfigJs(Options,currentFolder))
+		.then((devdepend) => jsonCreater.addDevDependencies(Options,currentFolder,devdepend))
 		.then(() => jsonCreater.addDependencies(Options,currentFolder))
-		.then(() => jsonCreater.addDevDependencies(Options,currentFolder))
+		.then(() => jsonCreater.createEsLintjson(Options,currentFolder))
 		.then(() => {
 			console.log(chalk.green.bold('All Done!'));
 			console.log(chalk.green.bold(`run cd ${projectName}`));
