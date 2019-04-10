@@ -47,8 +47,9 @@ const Init = async (projectName) => {
 	console.log(chalk.green.bold('All set initialising project'));
 
 	jsonCreater.createPackageJson(Options,currentFolder)
+		.then(() => jsonCreater.createTemplateProject(currentFolder))
 		.then(() => jsonCreater.generateConfigJs(Options,currentFolder))
-		.then((devdepend) => jsonCreater.addDevDependencies(Options,currentFolder,devdepend))
+		.then(devdepend => jsonCreater.addDevDependencies(Options,currentFolder,devdepend))
 		.then(() => jsonCreater.addDependencies(Options,currentFolder))
 		.then(() => jsonCreater.createEsLintjson(Options,currentFolder))
 		.then(() => {

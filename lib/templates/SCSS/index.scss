@@ -1,0 +1,22 @@
+@font-face {
+    font-family: 'SF display';
+    src: url('../fonts/SF-UI-Display-Regular.otf') format("otf") 
+}
+
+body {
+    font-family: 'SF display', sans-serif;
+    background-color: #e4f0f0;
+    display: grid;
+    grid-template-rows: auto auto;
+    justify-items: center;
+    align-items: center;
+
+    img{
+        grid-row: 1 / 1;
+    }
+
+    div{
+        grid-row: 2 / 2;
+        font-size: 1.5em;
+    }
+}
