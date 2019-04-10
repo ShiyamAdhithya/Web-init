@@ -24,7 +24,6 @@
     "cross-spawn": "^6.0.5",
     "figlet": "^1.2.1",
     "inquirer": "^6.2.2",
-    "loadash": "^1.0.0",
     "ncp": "^2.0.0"
   },
   "devDependencies": {
