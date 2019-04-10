@@ -1,5 +1,5 @@
 {
-  "name": "@generator/webinit",
+  "name": "webinit-ator",
   "version": "1.0.1",
   "description": "Webpack bolierplates for webpages.",
   "main": "index.js",
@@ -16,6 +16,9 @@
   "bin": {
     "webinit": "./index.js"
   },
+  "directories":{
+    "lib": "lib/templates"
+  }, 
   "dependencies": {
     "chalk": "^2.4.2",
     "clear": "^0.1.0",
